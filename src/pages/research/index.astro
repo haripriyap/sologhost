@@ -1,0 +1,568 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout title="Research - Solo Ghost" description="Research directions in wireless PHY, channel structure, mobility, adaptive estimation and tracking, receiver design and AI-native communication systems.">
+  <section class="research-hero">
+    <div class="container narrow">
+      <p class="eyebrow">RESEARCH</p>
+
+      <h1>Understanding structure before optimizing the receiver.</h1>
+
+      <p class="lead">
+        Solo Ghost studies how physical and statistical structure in wireless
+        signals can be identified, modeled and exploited to build more
+        adaptive communication systems.
+      </p>
+    </div>
+  </section>
+
+  <section class="thesis-section">
+    <div class="container two-column">
+      <div>
+        <p class="section-label">RESEARCH THESIS</p>
+        <h2>Wireless signals are not arbitrary data.</h2>
+      </div>
+
+      <div class="prose">
+        <p>
+          Wireless channels evolve according to physical processes. They contain
+          spatial, temporal, frequency and delay structure that can change with
+          mobility, propagation conditions and interference.
+        </p>
+
+        <p>
+          Solo Ghost investigates how that structure can be understood and used
+          by receiver algorithms rather than treating every observation as an
+          unrelated realization.
+        </p>
+
+        <p>
+          The goal is not to replace classical signal processing, but to discover
+          where structure-aware methods can make receivers more adaptive,
+          efficient and robust.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="trajectory-section">
+    <div class="container">
+      <p class="section-label">RESEARCH TRAJECTORY</p>
+
+      <h2>From wireless signal understanding toward AI-native receivers.</h2>
+
+      <div class="trajectory">
+        <article class="trajectory-item">
+          <span class="number">01</span>
+          <h3>Wireless PHY &amp; Signal Processing</h3>
+          <p>
+            Discrete-time signals, OFDM, synchronization, CFO, channel
+            estimation, equalization, detection and MIMO form the engineering
+            foundation.
+          </p>
+        </article>
+
+        <article class="trajectory-item">
+          <span class="number">02</span>
+          <h3>Channel Structure</h3>
+          <p>
+            Investigating spatial, temporal, frequency and delay-related
+            structure in wireless channels and how that structure changes
+            across observations.
+          </p>
+        </article>
+
+        <article class="trajectory-item">
+          <span class="number">03</span>
+          <h3>Mobility &amp; Doppler</h3>
+          <p>
+            Understanding channel evolution, temporal coherence and the
+            conditions under which conventional correlation and tracking
+            assumptions become unreliable.
+          </p>
+        </article>
+
+        <article class="trajectory-item">
+          <span class="number">04</span>
+          <h3>Structure-Aware Receivers</h3>
+          <p>
+            Exploring adaptive channel acquisition, estimation, equalization
+            and detection methods that exploit identifiable signal or channel
+            structure.
+          </p>
+        </article>
+
+        <article class="trajectory-item">
+          <span class="number">05</span>
+          <h3>Adaptive Estimation &amp; Tracking</h3>
+          <p>
+            Studying evolving wireless channels as dynamic states and exploring
+            recursive, predictive and structure-aware approaches for estimating
+            and tracking them over time.
+          </p>
+        </article>
+
+        <article class="trajectory-item">
+          <span class="number">06</span>
+          <h3>AI-Native Communication Systems</h3>
+          <p>
+            A longer-term direction in which learned models work alongside
+            physics-based signal processing to create receivers that learn
+            from structured wireless observations.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="areas-section">
+    <div class="container">
+      <div class="section-heading">
+        <div>
+          <p class="section-label">CURRENT RESEARCH AREAS</p>
+          <h2>Problems we are actively exploring.</h2>
+        </div>
+      </div>
+
+      <div class="areas-grid">
+        <article class="area-card">
+          <span class="area-number">01</span>
+          <h3>Channel Acquisition &amp; Estimation</h3>
+          <p>
+            How much channel information is actually necessary, and how should
+            acquisition and estimation adapt to channel structure and evolution?
+          </p>
+        </article>
+
+        <article class="area-card">
+          <span class="area-number">02</span>
+          <h3>Mobility-Aware Processing</h3>
+          <p>
+            How should receivers behave when Doppler and rapid channel evolution
+            challenge assumptions built around slow or stationary channels?
+          </p>
+        </article>
+
+        <article class="area-card">
+          <span class="area-number">03</span>
+          <h3>Adaptive Estimation &amp; Tracking</h3>
+          <p>
+            How can recursive estimation, state representations and temporal
+            models help receivers predict and track evolving channel conditions?
+          </p>
+        </article>
+
+        <article class="area-card">
+          <span class="area-number">04</span>
+          <h3>Structure-Aware Equalization</h3>
+          <p>
+            How can delay, frequency and channel structure inform more efficient
+            representations and receiver processing?
+          </p>
+        </article>
+
+        <article class="area-card">
+          <span class="area-number">05</span>
+          <h3>Adaptive Signal Detection</h3>
+          <p>
+            How can detection complexity and signal representation adapt to the
+            structure and conditions actually present in the received signal?
+          </p>
+        </article>
+
+        <article class="area-card">
+          <span class="area-number">06</span>
+          <h3>Wireless Simulation &amp; Dataset Generation</h3>
+          <p>
+            Building physics-accurate simulation workflows that can generate
+            controlled wireless observations for research, benchmarking and
+            future learning-based receiver development.
+          </p>
+        </article>
+
+        <article class="area-card">
+          <span class="area-number">07</span>
+          <h3>AI-Native PHY</h3>
+          <p>
+            Investigating how machine learning can augment, rather than obscure,
+            the physical and statistical structure already present in wireless
+            signals.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="methods-section">
+    <div class="container two-column">
+      <div>
+        <p class="section-label">TECHNICAL METHODS</p>
+        <h2>Models and tools used to study evolving wireless systems.</h2>
+      </div>
+
+      <div class="method-list">
+        <div class="method-item">
+          <h3>Recursive Estimation</h3>
+          <p>
+            Updating channel knowledge sequentially as new observations arrive.
+          </p>
+        </div>
+
+        <div class="method-item">
+          <h3>State-Space Modeling</h3>
+          <p>
+            Representing evolving channel behavior through latent states,
+            observations and temporal dynamics.
+          </p>
+        </div>
+
+        <div class="method-item">
+          <h3>Kalman &amp; Kalman-Like Tracking</h3>
+          <p>
+            Studying prediction and measurement updates for time-varying
+            channel estimation and tracking.
+          </p>
+        </div>
+
+        <div class="method-item">
+          <h3>Temporal &amp; Statistical Models</h3>
+          <p>
+            Using correlation, coherence and stochastic channel models to
+            understand how wireless observations evolve over time.
+          </p>
+        </div>
+
+        <div class="method-item">
+          <h3>Structure-Aware Representations</h3>
+          <p>
+            Looking for lower-dimensional, sparse, subspace or otherwise
+            structured representations that preserve useful receiver information.
+          </p>
+        </div>
+
+        <div class="method-item">
+          <h3>Physics-Accurate Simulation</h3>
+          <p>
+            Creating controlled environments for testing receiver assumptions,
+            generating observations and benchmarking adaptive methods.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mobility-section">
+    <div class="container two-column">
+      <div>
+        <p class="section-label">DYNAMIC WIRELESS SYSTEMS</p>
+        <h2>Mobility changes the assumptions.</h2>
+      </div>
+
+      <div class="prose">
+        <p>
+          A recurring research question at Solo Ghost is what happens when
+          receiver assumptions developed for relatively stable channels are
+          exposed to mobility and Doppler.
+        </p>
+
+        <p>
+          This motivates work across channel correlation, coherence, recursive
+          estimation, state tracking and adaptive receiver behavior.
+        </p>
+
+        <a class="text-link" href="/notes/">Explore technical notes -&gt;</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="applications-section">
+    <div class="container">
+      <p class="section-label">POTENTIAL APPLICATION DOMAINS</p>
+
+      <h2>Research that can extend across demanding wireless environments.</h2>
+
+      <div class="application-grid">
+        <article>
+          <h3>UAV / Aerial Communications</h3>
+          <p>High mobility, rapidly changing channels and Doppler.</p>
+        </article>
+
+        <article>
+          <h3>NTN / Satellite</h3>
+          <p>Mobility, Doppler, long propagation paths and constrained resources.</p>
+        </article>
+
+        <article>
+          <h3>5G / 6G / Private Networks</h3>
+          <p>Adaptive receiver processing for evolving network conditions.</p>
+        </article>
+
+        <article>
+          <h3>Radar / Sensing</h3>
+          <p>Motion, Doppler, structure and limited measurements.</p>
+        </article>
+      </div>
+
+      <p class="application-note">
+        These are research directions and potential application domains,
+        not representations of current products or deployed systems.
+      </p>
+    </div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container narrow">
+      <p class="section-label">RESEARCH EVIDENCE</p>
+
+      <h2>Research is accompanied by executable engineering work.</h2>
+
+      <p>
+        Solo Ghost documents experiments through technical notes, reproducible
+        simulations and engineering artifacts, while selected work is reflected
+        in the public IP portfolio.
+      </p>
+
+      <div class="evidence-links">
+        <a href="/artifacts/">Engineering Artifacts</a>
+        <a href="/notes/">Technical Notes</a>
+        <a href="/ip/">IP Portfolio</a>
+        <a href="https://github.com/haripriyap/doppler-coherence-analysis" target="_blank" rel="noopener noreferrer">GitHub</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .research-hero {
+    padding: 126px 0 112px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .eyebrow,
+  .section-label,
+  .number,
+  .area-number {
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+
+  h1 {
+    max-width: 920px;
+    margin: 20px 0 30px;
+    font-size: clamp(2.8rem, 6vw, 5.4rem);
+    line-height: 1.02;
+    letter-spacing: -0.055em;
+    font-weight: 600;
+  }
+
+  .lead {
+    max-width: 760px;
+    margin: 0;
+    color: var(--muted);
+    font-size: 1.15rem;
+    line-height: 1.65;
+  }
+
+  .thesis-section,
+  .trajectory-section,
+  .areas-section,
+  .methods-section,
+  .mobility-section,
+  .applications-section,
+  .evidence-section {
+    padding: 112px 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .two-column {
+    display: grid;
+    grid-template-columns: minmax(260px, 0.8fr) minmax(0, 1.2fr);
+    gap: 80px;
+  }
+
+  h2 {
+    max-width: 800px;
+    margin: 14px 0 28px;
+    font-size: clamp(1.9rem, 3vw, 2.8rem);
+    line-height: 1.12;
+    letter-spacing: -0.035em;
+    font-weight: 560;
+  }
+
+  .prose {
+    max-width: 700px;
+    color: var(--muted);
+  }
+
+  .prose p {
+    margin: 0 0 22px;
+  }
+
+  .trajectory,
+  .areas-grid {
+    margin-top: 48px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .trajectory-item {
+    min-height: 270px;
+    padding: 34px;
+    background: var(--surface);
+  }
+
+  .number {
+    display: block;
+    margin-bottom: 56px;
+  }
+
+  .trajectory-item h3,
+  .area-card h3,
+  .application-grid h3,
+  .method-item h3 {
+    margin: 0 0 14px;
+    font-size: 1.35rem;
+    line-height: 1.2;
+    letter-spacing: -0.025em;
+  }
+
+  .trajectory-item p,
+  .area-card p,
+  .application-grid p,
+  .method-item p {
+    margin: 0;
+    max-width: 520px;
+    color: var(--muted);
+  }
+
+  .area-card {
+    min-height: 240px;
+    padding: 34px;
+    background: var(--surface);
+  }
+
+  .area-number {
+    display: block;
+    margin-bottom: 46px;
+  }
+
+  .method-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+  }
+
+  .method-item {
+    min-height: 170px;
+    padding: 28px;
+    background: var(--surface);
+  }
+
+  .method-item h3 {
+    font-size: 1.12rem;
+  }
+
+  .mobility-section {
+    background: var(--surface);
+  }
+
+  .application-grid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .application-grid article {
+    min-height: 210px;
+    padding: 28px;
+    background: var(--bg);
+  }
+
+  .application-grid h3 {
+    font-size: 1.1rem;
+  }
+
+  .application-note {
+    margin: 22px 0 0;
+    color: var(--muted);
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    line-height: 1.6;
+  }
+
+  .evidence-section {
+    border-bottom: 0;
+  }
+
+  .evidence-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px 30px;
+    margin-top: 36px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  .text-link {
+    display: inline-block;
+    margin-top: 8px;
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+
+  @media (max-width: 900px) {
+    .two-column {
+      grid-template-columns: 1fr;
+      gap: 36px;
+    }
+
+    .application-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (max-width: 720px) {
+    .research-hero {
+      padding: 86px 0 78px;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 13vw, 4rem);
+    }
+
+    .thesis-section,
+    .trajectory-section,
+    .areas-section,
+    .methods-section,
+    .mobility-section,
+    .applications-section,
+    .evidence-section {
+      padding: 78px 0;
+    }
+
+    .trajectory,
+    .areas-grid,
+    .method-list,
+    .application-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .trajectory-item,
+    .area-card,
+    .application-grid article,
+    .method-item {
+      min-height: 0;
+    }
+
+    .number,
+    .area-number {
+      margin-bottom: 34px;
+    }
+  }
+</style>

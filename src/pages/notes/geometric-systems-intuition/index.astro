@@ -1,0 +1,576 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Geometric and Systems Intuition for Modern Wireless PHY - Solo Ghost"
+  description="A systems-level view of OFDM, MIMO, Doppler, covariance, estimation, and adaptive wireless receivers."
+>
+  <article class="note">
+    <header class="note-hero">
+      <div class="container narrow">
+        <p class="eyebrow">TECHNICAL NOTE 01</p>
+        <h1>Geometric and Systems Intuition for Modern Wireless PHY</h1>
+        <p class="subtitle">
+          A systems-level view of OFDM, MIMO, Doppler, covariance, estimation,
+          and adaptive receivers.
+        </p>
+        <div class="note-meta">
+          <span>SOLO GHOST</span>
+          <span>TECHNICAL NOTE</span>
+        </div>
+      </div>
+    </header>
+
+    <section class="note-section">
+      <div class="container narrow">
+        <p class="section-label">1 · WHY LOOK AT PHY GEOMETRICALLY?</p>
+        <p>
+          Wireless receivers are often taught as a sequence of processing
+          blocks: synchronization, CP removal, FFT, channel estimation,
+          equalization, detection, and decoding.
+        </p>
+        <p>
+          Each block has its own mathematics. But a more useful systems-level
+          interpretation is to ask:
+        </p>
+        <blockquote>
+          What is each receiver operation doing to the representation of the signal?
+        </blockquote>
+        <p>This reveals a common structure:</p>
+        <div class="concept-grid">
+          <div><strong>DFT</strong><span>Projection onto frequency basis functions</span></div>
+          <div><strong>SVD</strong><span>Decomposition into spatial directions</span></div>
+          <div><strong>Covariance</strong><span>Statistical structure and uncertainty</span></div>
+          <div><strong>Estimation</strong><span>Inference of hidden channel or state</span></div>
+          <div><strong>Equalization</strong><span>Compensation for channel-induced distortion</span></div>
+          <div><strong>Tracking</strong><span>Following an evolving state</span></div>
+          <div><strong>Beamforming</strong><span>Steering energy in selected spatial directions</span></div>
+          <div><strong>Detection</strong><span>Deciding which valid signal point best explains an observation</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="note-section alt">
+      <div class="container narrow">
+        <p class="section-label">2 · OFDM AS A COORDINATE TRANSFORMATION</p>
+        <p>
+          An OFDM symbol can be viewed as a linear combination of orthogonal
+          complex exponential basis functions:
+        </p>
+        <pre><code>φₖ[n] = eʲ²πkn/N
+x[n] = Σₖ X[k] φₖ[n]</code></pre>
+        <p>
+          The basis function is the oscillation pattern. The projection onto
+          that basis produces the complex coefficient X[k]. The coefficient
+          represents the magnitude and phase of that frequency component.
+        </p>
+        <p>
+          Geometrically, the DFT changes the coordinates used to represent the
+          same signal. The time-domain waveform and frequency-domain
+          coefficients are two representations of the underlying signal.
+        </p>
+        <h2>Why can OFDM separate subcarriers?</h2>
+        <p>
+          The OFDM basis functions are orthogonal over the observation
+          interval. Ideally, the inner product between two different basis
+          functions is zero. Projection onto one basis therefore does not
+          collect energy from another.
+        </p>
+        <blockquote>
+          Orthogonality is the geometric reason OFDM can separate subcarriers.
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="note-section">
+      <div class="container narrow">
+        <p class="section-label">3 · CP, CONVOLUTION AND THE FREQUENCY-DOMAIN CHANNEL</p>
+        <p>
+          A multipath SISO channel can be represented by an impulse response
+          h[0], h[1], …, h[L−1]. Without a cyclic prefix, transmission through
+          the channel produces linear convolution and can be represented by a
+          Toeplitz convolution matrix.
+        </p>
+        <p>
+          With a sufficiently long cyclic prefix, the useful received
+		  OFDM block can be represented as circular convolution. The DFT 
+		  then diagonalizes that circular convolution operator. The DFT then 
+		  diagonalizes that circular convolution operator.
+        </p>
+        <pre><code>linear convolution
+        ↓
+cyclic prefix
+        ↓
+circular convolution
+        ↓
+DFT
+        ↓
+diagonal frequency-domain channel</code></pre>
+        <p>The familiar per-subcarrier relationship follows:</p>
+        <pre><code>Y[k] = H[k] X[k] + N[k]</code></pre>
+        <p>
+          For MIMO, each transmit-receive antenna pair has its own time-domain
+          impulse response. Applying the DFT to each pair produces one MIMO
+          channel matrix H[k] for each subcarrier.
+        </p>
+        <pre><code>time-domain MIMO impulse responses
+              ↓
+      CP / circular structure
+              ↓
+       DFT across delay
+              ↓
+       H[0], H[1], …, H[N−1]
+              ↓
+   one MIMO channel matrix per subcarrier</code></pre>
+      </div>
+    </section>
+
+    <section class="note-section alt">
+      <div class="container narrow">
+        <p class="section-label">4 · FREQUENCY, SPACE AND TIME ARE DIFFERENT DIMENSIONS</p>
+        <p>OFDM-MIMO processing simultaneously involves several dimensions:</p>
+        <div class="dimension-list">
+          <div><strong>Frequency</strong><span>Subcarriers</span></div>
+          <div><strong>Space</strong><span>Transmit/receive antenna directions</span></div>
+          <div><strong>Time</strong><span>Channel evolution</span></div>
+          <div><strong>Delay</strong><span>Multipath structure</span></div>
+        </div>
+        <p>
+          The DFT and SVD should therefore not be confused. The DFT transforms
+          between time and frequency representations. The SVD decomposes a
+          MIMO channel matrix into spatial directions.
+        </p>
+        <pre><code>DFT
+  → frequency representation
+
+SVD
+  → spatial channel modes
+
+Covariance
+  → statistical structure</code></pre>
+        <p>
+          For each subcarrier, a MIMO channel can be decomposed as:
+        </p>
+        <pre><code>H[k] = U[k] Σ[k] Vᴴ[k]</code></pre>
+        <p>
+          The singular vectors describe transmit- and receive-side spatial
+          directions, while the singular values describe the strengths of the
+          corresponding spatial modes.
+        </p>
+      </div>
+    </section>
+
+    <section class="note-section">
+      <div class="container narrow">
+        <p class="section-label">5 · FREQUENCY SELECTIVITY IS NOT THE SAME AS TIME VARIATION</p>
+        <div class="compare">
+          <div>
+            <strong>Frequency-selective</strong>
+            <p>The channel response varies with frequency.</p>
+            <code>H[k₁] ≠ H[k₂]</code>
+          </div>
+          <div>
+            <strong>Time-varying</strong>
+            <p>The channel changes with time.</p>
+            <code>H[k,t₁] ≠ H[k,t₂]</code>
+          </div>
+        </div>
+        <p>
+          Frequency selectivity is primarily associated with multipath delay
+          spread. Time variation can arise from Doppler, mobility, changing
+          geometry, and changing propagation paths.
+        </p>
+        <p>
+          A channel can therefore be frequency-selective and stationary,
+          frequency-flat and time-varying, or both frequency-selective and
+          time-varying.
+        </p>
+      </div>
+    </section>
+
+    <section class="note-section alt">
+      <div class="container narrow">
+        <p class="section-label">6 · COVARIANCE: STRUCTURE INSIDE RANDOMNESS</p>
+        <p>
+          Covariance measures how quantities vary together. For a random vector
+          x, its covariance matrix is:
+        </p>
+        <pre><code>Rₓ = E[(x − μ)(x − μ)ᴴ]</code></pre>
+        <p>
+          The covariance matrix therefore contains the pairwise statistical
+          relationships among the components.
+        </p>
+        <p>
+          The covariance matrix encodes statistical structure; its 
+		  eigendecomposition exposes the principal directions of that structure.
+          A common next step is eigendecomposition:
+        </p>
+        <pre><code>R = Q Λ Qᴴ
+
+eigenvectors → principal directions
+eigenvalues  → variance / power along those directions</code></pre>
+        <blockquote>
+          Covariance describes the statistical structure; eigendecomposition
+          reveals the dominant directions of that structure.
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="note-section">
+      <div class="container narrow">
+        <p class="section-label">7 · COVARIANCE IS NOT AN ICI MATRIX</p>
+        <p>
+          Under ideal OFDM conditions, the frequency-domain channel is
+          approximately diagonal in the subcarrier domain. Under time
+          variation during the OFDM symbol, off-diagonal terms can appear:
+        </p>
+        <pre><code>Y[k] = Σₘ H[k,m] X[m] + N[k]
+
+ideal:
+H[k,m] ≈ 0  for k ≠ m
+
+time-varying:
+H[k,m] ≠ 0  for k ≠ m</code></pre>
+        <div class="compare">
+          <div><strong>Covariance matrix</strong><p>Statistical relationship among random quantities.</p></div>
+          <div><strong>ICI / channel coupling matrix</strong><p>Effective coupling between subcarrier components.</p></div>
+        </div>
+        <p>
+          The two can be statistically related, but they are different
+          mathematical objects.
+        </p>
+      </div>
+    </section>
+
+    <section class="note-section alt">
+      <div class="container narrow">
+        <p class="section-label">8 · WHAT DOPPLER DOES GEOMETRICALLY</p>
+        <p>
+          Doppler causes the channel to vary during the OFDM observation
+          interval. A simplified Doppler contribution can be represented by a
+          time-dependent phase:
+        </p>
+        <pre><code>eʲ²πfᴰt</code></pre>
+        <pre><code>ideal case
+
+projection onto basis k
+        ↓
+mostly coefficient X[k]
+
+
+time-varying channel
+
+projection onto basis k
+        ↓
+desired component
++
+energy from other basis components</code></pre>
+        <p>
+          That leakage is the geometric origin of ICI.
+        </p>
+        <p>
+          This should be kept separate from MIMO eigenstructure evolution.
+          Doppler can degrade Fourier/subcarrier orthogonality, while channel
+          evolution can cause spatial singular vectors or eigenmodes to change.
+          Both phenomena can occur simultaneously, but they are not the same
+          mechanism.
+        </p>
+      </div>
+    </section>
+
+    <section class="note-section">
+      <div class="container narrow">
+        <p class="section-label">9 · CORRELATION, COHERENCE AND ESTIMATION VALIDITY</p>
+        <blockquote>
+          How long or how far does a useful relationship in the signal or
+          channel remain sufficiently preserved?
+        </blockquote>
+        <p>
+          Temporal correlation provides a mathematical basis for understanding
+          temporal coherence. High correlation magnitude indicates strong
+          similarity; low magnitude indicates weaker similarity.
+        </p>
+        <pre><code>channel estimate
+      ↓
+useful for some interval
+      ↓
+channel evolves
+      ↓
+estimate becomes stale</code></pre>
+        <p>
+          This is the practical meaning of estimation validity. The useful
+          interval depends on Doppler, channel statistics, required accuracy,
+          estimator behavior, and system design.
+        </p>
+      </div>
+    </section>
+
+    <section class="note-section alt">
+      <div class="container narrow">
+        <p class="section-label">10 · ESTIMATION AS GEOMETRIC INFERENCE</p>
+        <p>A receiver often observes a noisy relationship such as:</p>
+        <pre><code>y = f(x, θ) + n</code></pre>
+        <p>
+          where θ represents an unknown channel or state. The receiver seeks
+          an explanation of the observations that is consistent with the
+          assumed model and uncertainty.
+        </p>
+        <pre><code>known pilot
+    ↓
+unknown channel
+    ↓
+noisy observation
+    ↓
+channel estimate</code></pre>
+        <p>
+          Under the appropriate Hilbert-space interpretation, MMSE estimation
+          can be viewed as a projection onto the information available to the
+          estimator.
+        </p>
+      </div>
+    </section>
+
+    <section class="note-section">
+      <div class="container narrow">
+        <p class="section-label">11 · KALMAN FILTERING AS EVOLVING INFERENCE</p>
+        <p>A state-space model describes a hidden state that evolves over time and produces observations:</p>
+        <pre><code>xₖ = A xₖ₋₁ + wₖ
+yₖ = H xₖ + vₖ</code></pre>
+        <pre><code>previous state estimate
+        ↓
+     predict
+        ↓
+ new observation
+        ↓
+     correct
+        ↓
+updated state estimate
+        ↓
+      repeat</code></pre>
+        <p>
+          Its covariance represents uncertainty about the state estimate.
+          Geometrically, uncertainty can be imagined as an evolving ellipsoid:
+          prediction expands or transforms uncertainty, while measurements
+          contract it along observed directions.
+        </p>
+      </div>
+    </section>
+
+    <section class="note-section alt">
+      <div class="container narrow">
+        <p class="section-label">12 · THE RECEIVER AS A DYNAMICAL SYSTEM</p>
+        <pre><code>physical environment
+        ↓
+time-varying channel
+        ↓
+observations
+        ↓
+estimation
+        ↓
+state / channel representation
+        ↓
+prediction
+        ↓
+adaptation
+        ↓
+new observation
+        ↺</code></pre>
+        <p>
+          Under mobility, the receiver is not merely processing independent
+          packets. It is continuously trying to infer and track an evolving
+          physical state.
+        </p>
+        <blockquote>
+          Modern PHY can increasingly be understood as state estimation and
+          adaptive inference over an evolving physical system.
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="note-section">
+      <div class="container narrow">
+        <p class="section-label">13 · FROM REACTIVE PHY TO PREDICTIVE PHY</p>
+        <pre><code>channel changes
+      ↓
+estimate degradation
+      ↓
+update receiver</code></pre>
+        <pre><code>observe channel evolution
+      ↓
+infer dynamics
+      ↓
+predict degradation
+      ↓
+adapt before failure</code></pre>
+        <p>
+          Prediction should not be separated from confidence. A useful adaptive
+          architecture can combine prediction with a measure of how reliable
+          that prediction is.
+        </p>
+        <pre><code>high confidence
+    ↓
+predictive adaptation
+
+low confidence
+    ↓
+robust / classical fallback</code></pre>
+      </div>
+    </section>
+
+    <section class="note-section alt">
+      <div class="container narrow">
+        <p class="section-label">14 · TOWARD AI-NATIVE PHY</p>
+        <p>
+          An AI-native PHY does not necessarily mean replacing DSP with a large
+          neural network.
+        </p>
+        <pre><code>classical DSP
+     +
+structured estimator
+     +
+lightweight learned predictor
+     +
+confidence mechanism
+     +
+adaptive control</code></pre>
+        <p>
+          A practical architecture can preserve deterministic components,
+          interpretability and existing PHY infrastructure while using learned
+          structure where it provides useful prediction or adaptation.
+        </p>
+        <blockquote>
+          Can useful learned structure be compressed into a deterministic,
+          low-latency inference block?
+        </blockquote>
+      </div>
+    </section>
+
+    <section class="note-section">
+      <div class="container narrow">
+        <p class="section-label">15 · A UNIFIED MENTAL MODEL</p>
+        <pre><code>                 PHYSICAL CHANNEL
+                       │
+             ┌─────────┴─────────┐
+             │                   │
+          multipath             motion
+             │                   │
+           delay              Doppler
+             │                   │
+             └─────────┬─────────┘
+                       ↓
+                time-varying MIMO
+                     channel
+                       │
+                       ↓
+                OFDM / DFT view
+                       │
+                       ↓
+                    H[k,t]
+                       │
+              ┌────────┴────────┐
+              │                 │
+          frequency           spatial
+          structure           structure
+              │                 │
+          correlation           SVD
+              │                 │
+              └────────┬────────┘
+                       ↓
+                   estimation
+                       │
+                   covariance
+                       │
+                       ↓
+                    tracking
+                       │
+                   prediction
+                       │
+                   confidence
+                       │
+                       ↓
+                  PHY adaptation
+                       │
+                       ↓
+                 new observation
+                       ↺</code></pre>
+      </div>
+    </section>
+
+    <section class="note-section alt">
+      <div class="container narrow">
+        <p class="section-label">16 · CORE PRINCIPLE</p>
+        <blockquote class="large-quote">
+          Do not treat channel variation as arbitrary randomness when part of
+          that variation is physically structured and therefore predictable.
+        </blockquote>
+        <p>Four questions follow:</p>
+        <ul>
+          <li>What structure is predictable?</li>
+          <li>Over what horizon?</li>
+          <li>With what confidence?</li>
+          <li>At what computational cost?</li>
+        </ul>
+        <p>
+          These questions bring estimation theory, stochastic processes, linear
+          algebra, DSP, control and machine learning into the same receiver
+          problem.
+        </p>
+        <p>
+          The long-term objective is not simply faster signal processing. It is
+          maintaining a reliable representation of an evolving wireless channel
+          and adapting the receiver before that representation becomes stale.
+        </p>
+      </div>
+    </section>
+
+    <footer class="note-footer">
+      <div class="container narrow">
+        <p class="section-label">SOLO GHOST</p>
+        <p>
+          This note is a systems-level conceptual synthesis. Detailed
+          experimental evidence will be developed in subsequent technical
+          notes and engineering artifacts.
+        </p>
+        <div class="footer-links">
+          <a href="/research/">Research →</a>
+          <a href="/artifacts/">Engineering artifacts →</a>
+          <a href="/ip/">Intellectual property →</a>
+        </div>
+      </div>
+    </footer>
+  </article>
+</BaseLayout>
+
+<style>
+  .note-hero { padding: 112px 0 100px; border-bottom: 1px solid var(--line); }
+  .eyebrow, .section-label, .note-meta, pre, code { font-family: var(--font-mono); }
+  .eyebrow, .section-label { color: var(--muted); font-size: .72rem; letter-spacing: .08em; }
+  h1 { max-width: 900px; margin: 20px 0 28px; font-size: clamp(2.4rem, 5vw, 4.5rem); line-height: 1.04; letter-spacing: -.052em; font-weight: 600; }
+  .subtitle { max-width: 720px; margin: 0; color: var(--muted); font-size: 1.08rem; line-height: 1.65; }
+  .note-meta { display: flex; flex-wrap: wrap; gap: 22px; margin-top: 34px; color: var(--muted); font-size: .68rem; letter-spacing: .08em; }
+  .note-section { padding: 88px 0; border-bottom: 1px solid var(--line); }
+  .note-section.alt { background: var(--surface); }
+  .note-section p { max-width: 760px; line-height: 1.75; }
+  .note-section h2 { margin: 42px 0 18px; font-size: clamp(1.5rem, 2.5vw, 2rem); line-height: 1.2; letter-spacing: -.03em; }
+  blockquote { max-width: 760px; margin: 34px 0; padding: 4px 0 4px 24px; border-left: 2px solid var(--line); font-size: 1.12rem; line-height: 1.6; }
+  .large-quote { margin: 42px 0; font-size: clamp(1.45rem, 3vw, 2.25rem); line-height: 1.25; letter-spacing: -.025em; }
+  pre { max-width: 760px; margin: 30px 0; padding: 24px; overflow-x: auto; background: var(--bg); border: 1px solid var(--line); font-size: .78rem; line-height: 1.7; white-space: pre-wrap; }
+  .concept-grid, .dimension-list, .compare { max-width: 820px; margin-top: 38px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); }
+  .concept-grid > div, .dimension-list > div, .compare > div { padding: 24px; background: var(--bg); }
+  .concept-grid strong, .dimension-list strong, .compare strong { display: block; margin-bottom: 8px; font-size: .95rem; }
+  .concept-grid span, .dimension-list span { display: block; color: var(--muted); font-size: .86rem; line-height: 1.5; }
+  .compare p { margin: 0 0 12px; color: var(--muted); }
+  .compare code { font-size: .76rem; }
+  ul { max-width: 720px; margin: 24px 0 30px; padding-left: 22px; color: var(--muted); line-height: 1.9; }
+  .note-footer { padding: 72px 0 100px; }
+  .note-footer > .narrow > p:not(.section-label) { max-width: 680px; color: var(--muted); }
+  .footer-links { display: flex; flex-wrap: wrap; gap: 18px 28px; margin-top: 28px; font-size: .9rem; font-weight: 600; }
+  @media (max-width: 720px) {
+    .note-hero { padding: 82px 0 72px; }
+    h1 { font-size: clamp(2.2rem, 11vw, 3.5rem); }
+    .note-section { padding: 68px 0; }
+    .concept-grid, .dimension-list, .compare { grid-template-columns: 1fr; }
+    pre { font-size: .7rem; padding: 18px; }
+  }
+</style>
