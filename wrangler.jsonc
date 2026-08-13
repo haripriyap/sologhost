@@ -1,0 +1,10 @@
+```jsonc
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "sologhost",
+  "compatibility_date": "2026-08-13",
+  "assets": {
+    "directory": "./dist"
+  }
+}
+```
