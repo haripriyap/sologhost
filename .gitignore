@@ -29,3 +29,12 @@ pnpm-debug.log*
 # internal AI / development instructions
 AGENTS.md
 CLAUDE.md
+
+# Cloudflare local development
+.wrangler/
+
+# Local environment files
+.env.*
+!.env.example
+.dev.vars
+.dev.vars.*

@@ -1,8 +1,18 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
   "name": "sologhost",
+  "main": "./worker/index.js",
   "compatibility_date": "2026-08-13",
   "assets": {
-    "directory": "./dist"
-  }
+    "directory": "./dist",
+    "binding": "ASSETS",
+    "run_worker_first": ["/api/*"]
+  },
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "sg-rva01-evaluations",
+      "database_id": "3d544e09-0f62-4825-8133-423c07850241"
+    }
+  ]
 }

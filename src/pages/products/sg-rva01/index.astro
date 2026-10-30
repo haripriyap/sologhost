@@ -1,0 +1,223 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="SG-RVA01 — Receiver Representation Validity Analyzer | Solo Ghost"
+  description="Explore receiver representation aging, CSI reuse consequences, and state-refresh decisions with Solo Ghost SG-RVA01."
+>
+  <div class="container product-page">
+    <section class="product-hero">
+      <p class="eyebrow">SOLO GHOST / ENGINEERING SOFTWARE</p>
+
+      <h1>SG-RVA01</h1>
+      <h2>Receiver Representation Validity Analyzer</h2>
+
+      <p class="lead">
+        Understand when a retained receiver representation may no longer
+        be suitable for the current wireless channel.
+      </p>
+
+      <a class="primary-button" href="/products/sg-rva01/request/">
+        Request Private Evaluation →
+      </a>
+
+      <p class="status">STATUS: PRIVATE ENGINEERING EVALUATION</p>
+    </section>
+
+    <section class="product-section">
+      <p class="eyebrow">THE PROBLEM</p>
+      <h2>Channel information ages. Receiver assumptions can age with it.</h2>
+
+      <p>
+        Wireless receivers reuse channel-dependent processing states to
+        reduce estimation and computation overhead. As propagation
+        conditions evolve, retained receiver representations may become
+        inaccurate even when they were previously valid.
+      </p>
+
+      <p>
+        SG-RVA01 provides an engineering environment for investigating
+        how representation aging affects receiver performance and when
+        additional state maintenance may be beneficial.
+      </p>
+    </section>
+
+    <section class="product-section">
+      <p class="eyebrow">CAPABILITIES</p>
+      <h2>Investigate receiver validity before committing to a refresh policy.</h2>
+
+      <div class="capability-grid">
+        <article>
+          <h3>Representation Aging</h3>
+          <p>
+            Explore how changing channel conditions affect the suitability
+            of retained receiver representations.
+          </p>
+        </article>
+
+        <article>
+          <h3>Receiver Consequences</h3>
+          <p>
+            Compare fresh and retained receiver-state configurations
+            through selected performance metrics and demonstration scenarios.
+          </p>
+        </article>
+
+        <article>
+          <h3>State Maintenance</h3>
+          <p>
+            Examine candidate state-maintenance alternatives and their
+            performance consequences under specified assumptions.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="product-section">
+      <p class="eyebrow">EVALUATION</p>
+      <h2>Research-backed engineering exploration.</h2>
+
+      <p>
+        SG-RVA01 builds on Solo Ghost's research into receiver
+        representation validity and channel-state aging.
+        Evaluation scenarios distinguish controlled analytical results,
+        simulation evidence, and illustrative behavior.
+      </p>
+
+      <p>
+        Results depend on the selected channel models, receiver
+        assumptions, and evaluation conditions. SG-RVA01 is currently
+        an engineering evaluation tool, not a production receiver.
+      </p>
+    </section>
+
+    <section class="product-section final-section">
+      <p class="eyebrow">PRIVATE ACCESS</p>
+      <h2>Evaluate SG-RVA01 with Solo Ghost.</h2>
+
+      <p>
+        Private technical evaluations are offered by request.
+        Access is subject to review and approval.
+      </p>
+
+      <a class="primary-button" href="/products/sg-rva01/request/">
+        Request Private Evaluation →
+      </a>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .product-page {
+    max-width: 1000px;
+  }
+
+  .product-hero {
+    padding: 110px 0 100px;
+  }
+
+  .eyebrow,
+  .status {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+
+  h1 {
+    font-size: clamp(3.5rem, 9vw, 6rem);
+    letter-spacing: -0.065em;
+    line-height: 1.1;
+    margin: 24px 0 8px;
+  }
+
+  .product-hero h2 {
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 450;
+    margin: 0 0 28px;
+  }
+
+  .lead {
+    max-width: 680px;
+    font-size: 1.3rem;
+    color: var(--muted);
+    margin-bottom: 36px;
+  }
+
+  .primary-button {
+    display: inline-block;
+    background: var(--text);
+    color: white;
+    padding: 14px 24px;
+    font-weight: 600;
+    border-radius: 4px;
+  }
+
+  .primary-button:hover {
+    text-decoration: none;
+    opacity: 0.85;
+  }
+
+  .status {
+    margin-top: 26px;
+  }
+
+  .product-section {
+    padding: 80px 0;
+    border-top: 1px solid var(--line);
+  }
+
+  .product-section h2 {
+    max-width: 740px;
+    font-size: clamp(1.8rem, 4vw, 2.7rem);
+    line-height: 1.2;
+    letter-spacing: -0.035em;
+    margin: 18px 0 30px;
+  }
+
+  .product-section > p:not(.eyebrow) {
+    max-width: 760px;
+    font-size: 1.05rem;
+    color: var(--muted);
+  }
+
+  .capability-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 28px;
+    margin-top: 48px;
+  }
+
+  .capability-grid article {
+    border-top: 2px solid var(--text);
+    padding-top: 18px;
+  }
+
+  .capability-grid h3 {
+    font-size: 1.15rem;
+  }
+
+  .capability-grid p {
+    color: var(--muted);
+    font-size: 0.95rem;
+  }
+
+  .final-section {
+    padding-bottom: 60px;
+  }
+
+  @media (max-width: 720px) {
+    .product-hero {
+      padding: 70px 0;
+    }
+
+    .product-section {
+      padding: 55px 0;
+    }
+
+    .capability-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
