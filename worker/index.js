@@ -129,7 +129,11 @@ async function verifyTurnstile(token, secretKey, remoteIP) {
 
     const result = await response.json();
 
-    return result.success === true;
+    return (
+      result.success === true &&
+      result.hostname === "sologhost.tech" &&
+      result.action === "evaluation_request"
+    );
   } catch {
     return false;
   }
@@ -194,6 +198,13 @@ async function verifyAdminToken(request, env) {
 export default {
   async fetch(request, env) {
   const url = new URL(request.url);
+    // Administrative and customer APIs belong to sg-rva01-api.
+    if (
+      url.pathname.startsWith("/api/") &&
+      url.pathname !== "/api/evaluation-request"
+    ) {
+      return jsonResponse({ error: "Not found." }, 404);
+    }
 
   // Administrative review API
   if (url.pathname === "/api/admin/evaluation-review") {
@@ -450,8 +461,7 @@ if (!turnstileValid) {
   );
 }
 
-if (!env.ENABLE_LOCAL_EVALUATION_TEST ||
-    env.ENABLE_LOCAL_EVALUATION_TEST !== "true") {
+if (env.ENABLE_EVALUATION_SUBMISSIONS !== "true") {
   return jsonResponse(
     { error: "Evaluation submissions are not enabled yet." },
     503

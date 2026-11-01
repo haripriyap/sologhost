@@ -56,28 +56,30 @@ import BaseLayout from "../../../../layouts/BaseLayout.astro";
       ></textarea>
 
       <p class="privacy">
-        Your information will be used to review your evaluation request
-        and contact you about SG-RVA01. Submitting a request does not
-        guarantee access.
+        We collect your name, organization, email address, and evaluation
+        purpose to review your request and, if approved, administer your
+        SG-RVA01 evaluation.
+
+        Please do not submit confidential technical information.
+
+        Submitting a request does not guarantee access.
+
+        Read our <a href="/privacy/">Privacy Policy</a>.
       </p>
 
       <div
         class="cf-turnstile"
-        data-sitekey="1x00000000000000000000AA"
+        data-sitekey="0x4AAAAAAFuCioIo_KJXylQ9"
         data-theme="light"
         data-action="evaluation_request"
       ></div>
 
-      <button id="submit-request" type="submit" disabled>
-        Request submission coming soon
+	  <button id="submit-request" type="submit">
+        Request SG-RVA01 evaluation
       </button>
 
       <p id="form-status" role="status" aria-live="polite"></p>
 
-      <p class="notice">
-        Online request submission is being configured.
-        Please do not enter personal information yet.
-      </p>
     </form>
   </div>
   <script

@@ -14,5 +14,15 @@
       "database_name": "sg-rva01-evaluations",
       "database_id": "3d544e09-0f62-4825-8133-423c07850241"
     }
+  ],
+  "vars": {
+  "ENABLE_EVALUATION_SUBMISSIONS": "true"
+},
+"secrets": {
+  "required": [
+    "TURNSTILE_SECRET_KEY",
+    "RESEND_API_KEY",
+    "EVALUATION_NOTIFY_EMAIL"
   ]
+}
 }
