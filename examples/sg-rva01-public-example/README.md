@@ -17,4 +17,4 @@ The script writes `synthetic_angle_and_leakage.png`. It needs NumPy and Matplotl
 
 [See the short animated explanation](assets/receiver_validity_loop.gif).
 
-SG-RVA01's public interactive demonstration uses synthetic channel data. Add its actual hosted URL here after deployment.
+SG-RVA01's public interactive demonstration uses synthetic channel data. Explore the [SG-RVA01 interactive synthetic demonstration](https://demo.sologhost.tech/)
