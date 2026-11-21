@@ -1,0 +1,218 @@
+---
+import BaseLayout from "../../../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Request SG-RVA01 Evaluation | Solo Ghost"
+  description="Request a private technical evaluation of the Solo Ghost SG-RVA01 Receiver Representation Validity Analyzer."
+>
+  <div class="container request-page">
+    <p class="eyebrow">SOLO GHOST / PRIVATE EVALUATION</p>
+
+    <h1>Request SG-RVA01 access.</h1>
+
+    <p class="intro">
+      SG-RVA01 is currently available for private engineering evaluation.
+      Tell us about your intended use, and Solo Ghost will review your request.
+    </p>
+
+    <form id="evaluation-form">
+      <label for="full-name">Full name *</label>
+      <input
+        id="full-name"
+        name="name"
+        type="text"
+        autocomplete="name"
+        maxlength="120"
+        required
+      />
+
+      <label for="organization">Organization *</label>
+      <input
+        id="organization"
+        name="organization"
+        type="text"
+        maxlength="160"
+        required
+      />
+
+      <label for="email">Business email *</label>
+      <input
+        id="email"
+        name="email"
+        type="email"
+        autocomplete="email"
+        maxlength="254"
+        required
+      />
+
+      <label for="purpose">Intended evaluation purpose *</label>
+      <textarea
+        id="purpose"
+        name="purpose"
+        rows="5"
+        maxlength="2000"
+        required
+      ></textarea>
+
+      <p class="privacy">
+        Your information will be used to review your evaluation request
+        and contact you about SG-RVA01. Submitting a request does not
+        guarantee access.
+      </p>
+
+      <div
+        class="cf-turnstile"
+        data-sitekey="1x00000000000000000000AA"
+        data-theme="light"
+        data-action="evaluation_request"
+      ></div>
+
+      <button id="submit-request" type="submit" disabled>
+        Request submission coming soon
+      </button>
+
+      <p id="form-status" role="status" aria-live="polite"></p>
+
+      <p class="notice">
+        Online request submission is being configured.
+        Please do not enter personal information yet.
+      </p>
+    </form>
+  </div>
+  <script
+    is:inline
+    src="https://challenges.cloudflare.com/turnstile/v0/api.js"
+    async
+    defer
+  ></script>
+  <script>
+    const form = document.querySelector<HTMLFormElement>(
+      "#evaluation-form"
+    );
+
+    const status = document.querySelector<HTMLElement>(
+      "#form-status"
+    );
+
+    form?.addEventListener("submit", async (event) => {
+      event.preventDefault();
+
+      if (!status) return;
+
+      status.textContent = "Processing request...";
+
+      const formData = new FormData(form);
+
+      const payload = {
+        name: formData.get("name"),
+        organization: formData.get("organization"),
+        email: formData.get("email"),
+        purpose: formData.get("purpose"),
+        turnstileToken: formData.get("cf-turnstile-response")
+      };
+
+      try {
+        const response = await fetch("/api/evaluation-request", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(payload)
+        });
+
+        const result = await response.json();
+
+        if (!response.ok) {
+          status.textContent =
+            result.error || "Request could not be submitted.";
+          return;
+        }
+
+        status.textContent = "Your request has been received.";
+        form.reset();
+      } catch {
+        status.textContent =
+          "Unable to contact the server. Please try again later.";
+      }
+    });
+  </script>
+</BaseLayout>
+
+<style>
+  .request-page {
+    max-width: 760px;
+    padding-top: 85px;
+    padding-bottom: 100px;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+    color: var(--muted);
+  }
+
+  h1 {
+    font-size: clamp(2.3rem, 5vw, 3.6rem);
+    letter-spacing: -0.05em;
+    line-height: 1.15;
+    margin: 20px 0;
+  }
+
+  .intro {
+    font-size: 1.15rem;
+    color: var(--muted);
+    margin-bottom: 45px;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  label {
+    font-weight: 600;
+    margin-top: 16px;
+  }
+
+  input,
+  textarea {
+    width: 100%;
+    padding: 13px;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    background: white;
+    color: var(--text);
+    font: inherit;
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: 2px solid var(--text);
+    outline-offset: 2px;
+  }
+
+  .privacy,
+  .notice {
+    color: var(--muted);
+    font-size: 0.85rem;
+  }
+
+  button {
+    align-self: flex-start;
+    padding: 14px 24px;
+    border: none;
+    border-radius: 4px;
+    background: var(--text);
+    color: white;
+    font: inherit;
+    font-weight: 600;
+  }
+
+  button:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+</style>
